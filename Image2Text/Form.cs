@@ -9,9 +9,9 @@ namespace Image2Text
     {
         private Point _rectStartPoint;
         private Rectangle _rect = new Rectangle();
-        private Brush _selectionBrush = new SolidBrush(Color.FromArgb(128, 72, 145, 220));
+        private readonly Brush _selectionBrush = new SolidBrush(Color.FromArgb(128, 72, 145, 220));
 
-        private IronTesseract _ocr = new IronTesseract(); 
+        private readonly IronTesseract _ocr = new IronTesseract(); 
 
         public Form()
         {
@@ -54,8 +54,7 @@ namespace Image2Text
             {
                 if (_rect.Contains(e.Location))
                 {
-                    var source = new Bitmap(pictureBox.Image);
-                    var croppedImage = CropImage(source, _rect);
+                    var croppedImage = GetCroppedImage(new Bitmap(pictureBox.Image), _rect);
 
                     using (var ocrInput = new OcrInput())
                     {
@@ -80,7 +79,7 @@ namespace Image2Text
 
         private void Form_Resize(object sender, EventArgs e)
         {
-            Control control = (Control)sender;
+            var control = (Control)sender;
 
             int width = control.Size.Width;
             int height = control.Size.Width;
@@ -88,7 +87,7 @@ namespace Image2Text
             pictureBox.Size = new Size(width, height);
         }
 
-        private Bitmap CropImage(Bitmap source, Rectangle section)
+        private Bitmap GetCroppedImage(Bitmap source, Rectangle section)
         {
             var bitmap = new Bitmap(section.Width, section.Height);
 
