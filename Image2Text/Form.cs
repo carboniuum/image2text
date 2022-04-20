@@ -77,16 +77,6 @@ namespace Image2Text
             }
         }
 
-        private void Form_Resize(object sender, EventArgs e)
-        {
-            var control = (Control)sender;
-
-            int width = control.Size.Width;
-            int height = control.Size.Width;
-
-            pictureBox.Size = new Size(width, height);
-        }
-
         private Bitmap GetCroppedImage(Bitmap source, Rectangle section)
         {
             var bitmap = new Bitmap(section.Width, section.Height);
@@ -95,6 +85,25 @@ namespace Image2Text
             {
                 g.DrawImage(source, 0, 0, section, GraphicsUnit.Pixel);
                 return bitmap;
+            }
+        }
+
+        private void panel_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    pictureBox.Left -= 10;
+                    break;
+                case Keys.Right:
+                    pictureBox.Left += 10;
+                    break;
+                case Keys.Up:
+                    pictureBox.Top += 10;
+                    break;
+                case Keys.Down:
+                    pictureBox.Top -= 10;
+                    break;
             }
         }
     }
