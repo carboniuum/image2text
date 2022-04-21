@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Image2Text.Helpers
 {
-    public static class Languages
+    public static class Langs
     {
         public static Dictionary<string, OcrLanguage> GetLanguages() => new Dictionary<string, OcrLanguage>
         {
