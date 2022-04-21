@@ -49,16 +49,16 @@ namespace Image2Text
             };
             Controls.Add(_trackBar);
 
-            comboBox.Items.AddRange(Langs.GetLanguages().Select(x => x.Key).ToArray());
+            comboBox.Items.AddRange(Langs.Dict.Select(x => x.Key).ToArray());
             comboBox.SelectedItem = comboBox.Items[0];
 
             _ocr.Configuration.TesseractVersion = TesseractVersion.Tesseract5;
-            _ocr.Language = Langs.GetLanguages()[comboBox.SelectedItem.ToString()];
+            _ocr.Language = Langs.Dict[comboBox.SelectedItem.ToString()];
         }
 
         private void comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _ocr.Language = Langs.GetLanguages()[comboBox.SelectedItem.ToString()];
+            _ocr.Language = Langs.Dict[comboBox.SelectedItem.ToString()];
         }
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
